@@ -18,7 +18,9 @@ function conectarBD() : mysqli {
 
 function ejecutarSql($sentenciaSql) {
     global $conexionActiva;
-    mysqli_query($conexionActiva, $sentenciaSql);
+    $resultado = mysqli_query($conexionActiva, $sentenciaSql);
+
+    return $resultado;
 }
 
 function desconectarBD() {
