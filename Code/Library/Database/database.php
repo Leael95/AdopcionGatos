@@ -3,7 +3,7 @@
 $conexionActiva = conectarBD();
 
 function conectarBD() : mysqli {
-    $conexion = mysqli_connect('localhost', 'root', 'root', 'proyectoadopciongatos');
+    $conexion = mysqli_connect('localhost', 'root', '', 'proyectoadopciongatos');
 
     if(!$conexion) {
         echo "Error no se pudo conectar";
