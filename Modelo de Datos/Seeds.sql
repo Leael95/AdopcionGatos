@@ -10,3 +10,7 @@ INSERT INTO estadostramiteadopcion (nombre) VALUES ("finalizado");
 INSERT INTO estadostramiteadopcion (nombre) VALUES ("en tramite");
 INSERT INTO estadostramiteadopcion (nombre) VALUES ("rechazado");
 INSERT INTO estadostramiteadopcion (nombre) VALUES ("iniciado");
+
+INSERT INTO razasgatos (nombre) VALUES ("trex");
+INSERT INTO razasgatos (nombre) VALUES ("raptor");
+INSERT INTO razasgatos (nombre) VALUES ("diplo");
