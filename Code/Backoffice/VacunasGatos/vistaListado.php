@@ -17,7 +17,7 @@ $listadoVacunas = listar();
 
 <table>
     <head>
-        <th>Color</th>
+        <th>Vacunas</th>
         <th>Acciones</th>
     </head>
     <body>
@@ -27,7 +27,7 @@ $listadoVacunas = listar();
                 <?php echo $vacunasGato['Nombre'] ?>         
             </td>
             <td>
-                <input type="button" value="Modificar">
+                <input type="button" value="Modificar" onclick="mostrarFormularioModificarVacunas(<?php echo $vacunasGato['Id']?>)">
                 <input type="button" value="Eliminar">
             </td>
         </tr>

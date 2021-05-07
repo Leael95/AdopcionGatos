@@ -1,7 +1,7 @@
 <?php
 
 require "../../Library/Database/database.php";
-procesarRequest();
+$vacuna = null;
 
 // ---------------------------------------------------------------------------------------------------------------------------
 
@@ -29,13 +29,13 @@ function procesarRequest() {
     if($metodo == 'GET') {
         // Obtener Query
         if(isset($_GET['Id'])) {
-            echo 'modificacion';
-        } else {
-            echo 'alta';
-        }
+            global $vacuna;
+            $idVacuna = $_GET['Id'];
+            $vacuna = traerPorId($idVacuna);
+        } 
     }
     if($metodo == 'POST') {
-        if(isset($_POST['Id'])){
+        if(isset($_POST['Id']) && $_POST['Id'] != null){
             modificar();
         } else {
             crear();
@@ -56,7 +56,11 @@ function crear() {
 // ---------------------------------------------------------------------------------------------------------------------------
 
 function modificar() {
-
+    $idVacuna = $_POST['Id'];
+    $vacuna = traerPorId($idVacuna);
+    $vacuna['Nombre'] = $_POST['nombreVacuna'];
+    $vacuna['Descripcion'] = $_POST['descripcionVacuna'];
+    ejecutarSql("UPDATE vacunas SET Nombre = '{$vacuna['Nombre']}', Descripcion = '{$vacuna['Descripcion']}' WHERE Id = {$idVacuna}");
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------
