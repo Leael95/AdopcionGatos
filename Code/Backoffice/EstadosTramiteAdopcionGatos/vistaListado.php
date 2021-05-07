@@ -4,12 +4,13 @@ require "controller.php";
 $listadoEstadoTramiteAdopcion = listar();
 
 // -------------------------------------------------- ?> 
+<script src="controller.js"></script>
 
 <h1>Vista Listado</h1>
 
 <br>
 
-<input type="button" value="Crear">
+<input type="button" value="Crear" id="formularioAlta" onclick="mostrarFormularioAlta()">
 
 <br>
 <br>

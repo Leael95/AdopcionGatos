@@ -34,7 +34,7 @@ function procesarRequest() {
         }
     }
     if($metodo == 'POST') {
-        if(isset($_POST['Id'])){
+        if(isset($_POST['Id'])) {
             modificar();
         } else {
             crear();
