@@ -3,13 +3,14 @@
 require "controller.php";
 $listadoEstados = listar();
 
-// -------------------------------------------------- ?> 
+// -------------------------------------------------- ?>
+<script src="controller.js"></script>
 
 <h1>Vista Listado</h1>
 
 <br>
 
-<input type="button" value="Crear">
+<input type="button" value="Crear" onclick="vistaEditar()" id="botonVistaEditar">
 
 <br>
 <br>

@@ -1,6 +1,7 @@
 <?php
 
 require "../../Library/Database/database.php";
+procesarRequest();
 
 // ---------------------------------------------------------------------------------------------------------------------------
 
@@ -15,8 +16,41 @@ function listar() {
 
 // ---------------------------------------------------------------------------------------------------------------------------
 
-function crear() {
+function traerPorId($id) {
+    $resultado = ejecutarSql("SELECT * FROM vacunas WHERE Id = {$id}");
+    return $resultado->fetch_assoc();
+}
 
+// ---------------------------------------------------------------------------------------------------------------------------
+
+function procesarRequest() {
+    $metodo = $_SERVER['REQUEST_METHOD'];
+
+    if($metodo == 'GET') {
+        // Obtener Query
+        if(isset($_GET['Id'])) {
+            echo 'modificacion';
+        } else {
+            echo 'alta';
+        }
+    }
+    if($metodo == 'POST') {
+        if(isset($_POST['Id'])){
+            modificar();
+        } else {
+            crear();
+        }
+        header("Location: vistaListado.php");
+        exit;
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------------
+
+function crear() {
+    $nombreVacuna = $_POST['nombreVacuna'];
+    $descripcionVacuna = $_POST['descripcionVacuna'];
+    ejecutarSql("INSERT INTO vacunas (Nombre,Descripcion) VALUES ('{$nombreVacuna}','{$descripcionVacuna}')");
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------
