@@ -1,7 +1,7 @@
 <?php
 
 require "../../Library/Database/database.php";
-procesarRequest();
+$ETAG = null;
 
 // ---------------------------------------------------------------------------------------------------------------------------
 
@@ -29,13 +29,13 @@ function procesarRequest() {
     if($metodo == 'GET') {
         // Obtener Query
         if(isset($_GET['Id'])) {
-            echo 'modificacion';
-        } else {
-            echo 'alta';
+            global $ETAG;
+            $idETAG = $_GET['Id'];
+            $ETAG = traerPorId($idETAG);
         }
     }
     if($metodo == 'POST') {
-        if(isset($_POST['Id'])) {
+        if(isset($_POST['Id']) && $_POST['Id'] != null) {
             modificar();
         } else {
             crear();
@@ -55,7 +55,10 @@ function crear() {
 // ---------------------------------------------------------------------------------------------------------------------------
 
 function modificar() {
-
+    $idETAG = $_POST['Id'];
+    $ETAG = traerPorId($idETAG);
+    $ETAG['Nombre'] = $_POST['estadosTramiteAdopcion'];
+    ejecutarSql("UPDATE estadostramiteadopcion SET Nombre = '{$ETAG['Nombre']}' WHERE Id = {$idETAG}");
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------

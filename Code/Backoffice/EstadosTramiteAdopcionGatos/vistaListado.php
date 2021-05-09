@@ -17,7 +17,7 @@ $listadoEstadoTramiteAdopcion = listar();
 
 <table>
     <head>
-        <th>Color</th>
+        <th>Estado Tramite Adopcion</th>
         <th>Acciones</th>
     </head>
     <body>
@@ -27,7 +27,7 @@ $listadoEstadoTramiteAdopcion = listar();
                 <?php echo $estadoTramiteAdopcionGato['Nombre'] ?>         
             </td>
             <td>
-                <input type="button" value="Modificar">
+                <input type="button" value="Modificar" onclick="mostrarFormularioModificarETAG(<?php echo $estadoTramiteAdopcionGato['Id']?>)">
                 <input type="button" value="Eliminar">
             </td>
         </tr>

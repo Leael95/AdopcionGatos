@@ -1,7 +1,8 @@
 <?php
 
 require "../../Library/Database/database.php";
-procesarRequest();
+$color = null;
+
 // ---------------------------------------------------------------------------------------------------------------------------
 
 function listar() {
@@ -28,13 +29,13 @@ function procesarRequest() {
     if($metodo == 'GET') {
         // Obtener Query
         if(isset($_GET['Id'])) {
-            echo 'modificacion';
-        } else {
-            echo 'alta';
-        }
+            global $color;
+            $idColor = $_GET['Id'];
+            $color = traerPorId($idColor);
+        } 
     }
     if($metodo == 'POST') {
-        if(isset($_POST['Id'])) {
+        if(isset($_POST['Id']) && $_POST['Id'] != null) {
             modificar();
         } else {
             crear();
@@ -54,7 +55,10 @@ function crear() {
 // ---------------------------------------------------------------------------------------------------------------------------
 
 function modificar() {
-
+    $idColor = $_POST['Id'];
+    $color = traerPorId($idColor);
+    $color['Nombre'] = $_POST['nombreColor'];
+    ejecutarSql("UPDATE coloresgatos SET Nombre = '{$color['Nombre']}' WHERE Id = {$idColor}");
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------

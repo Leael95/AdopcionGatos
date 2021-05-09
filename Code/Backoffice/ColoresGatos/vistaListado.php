@@ -27,7 +27,7 @@ $listadoColores = listar();
                 <?php echo $colorGato['Nombre'] ?>         
             </td>
             <td>
-                <input type="button" value="Modificar">
+                <input type="button" value="Modificar" onclick="mostrarFormularioModificarColor(<?php echo $colorGato['Id']?>)">
                 <input type="button" value="Eliminar">
             </td>
         </tr>
