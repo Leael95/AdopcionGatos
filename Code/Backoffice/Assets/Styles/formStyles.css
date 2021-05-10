@@ -1,0 +1,7 @@
+.msjErrorVisible {
+    color: red;
+}
+
+.msjErrorInvisible {
+    visibility: hidden;
+}

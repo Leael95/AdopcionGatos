@@ -13,3 +13,16 @@ function eliminar(id) {
 function mostrarListado() {
     window.location.href = "vistaListado.php";
 }
+
+function validarDatos() {
+    let txtNombreColor = document.getElementById("nombreColor");
+    let formulario = document.getElementById("formEditarColorGato");
+
+    if(txtNombreColor.value == "") {
+        let mensajeError = document.getElementById("msjErrorNombreColor");
+        mensajeError.classList.add("msjErrorVisible");
+        mensajeError.classList.remove("msjErrorInvisible");
+    } else {
+        formulario.submit();
+    }
+}
