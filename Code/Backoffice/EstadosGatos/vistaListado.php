@@ -10,7 +10,7 @@ $listadoEstados = listar();
 
 <br>
 
-<input type="button" value="Crear" onclick="vistaEditar()" id="botonVistaEditar">
+<input type="button" value="Crear" id="formularioEstadoGatos" onclick="mostrarFormularioAltaEstados()">
 
 <br>
 <br>
@@ -27,7 +27,7 @@ $listadoEstados = listar();
                 <?php echo $estadosGato['Nombre'] ?>         
             </td>
             <td>
-                <input type="button" value="Modificar">
+                <input type="button" value="Modificar" onclick="mostrarFormularioModificarEstados(<?php echo $estadosGato['Id']?>)">
                 <input type="button" value="Eliminar">
             </td>
         </tr>

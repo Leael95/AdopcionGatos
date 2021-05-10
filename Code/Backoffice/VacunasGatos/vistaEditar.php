@@ -5,7 +5,6 @@ procesarRequest();
 
 ?>
 
-
 <h1>Formulario de edicion de Vacunas</h1>
 
 <form action="vistaEditar.php" method="post">

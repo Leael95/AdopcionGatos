@@ -10,7 +10,7 @@ $listadoRazas = listar();
 
 <br>
 
-<input type="button" value="Crear" id="formularioAlta" onclick="mostrarFormularioAlta()">
+<input type="button" value="Crear" id="formularioAltaRazas" onclick="mostrarFormularioAltaRazas()">
 
 <br>
 <br>
@@ -27,7 +27,7 @@ $listadoRazas = listar();
                 <?php echo $razaGato['Nombre'] ?>         
             </td>
             <td>
-                <input type="button" value="Modificar">
+                <input type="button" value="Modificar" onclick="mostrarFormularioModificarRaza(<?php echo $razaGato['Id']?>)">
                 <input type="button" value="Eliminar">
             </td>
         </tr>
