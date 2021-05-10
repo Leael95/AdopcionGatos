@@ -5,7 +5,7 @@ procesarRequest();
 
 ?>
 
-<h1>Formulario de edicion de Colores</h1>
+<h1>Formulario de edicion de ColoresTestParaElGit</h1>
 
 <form action="vistaEditar.php" method="post">
     <input type="hidden" value="<?php mostrarId($color) ?>" name="Id" id="Id">
