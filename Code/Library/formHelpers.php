@@ -17,3 +17,11 @@ function mostrarId($Objeto) {
         echo null;
     }
 }
+
+function obtenerId($Objeto) {
+    if($Objeto != null) {
+        return $Objeto['Id'];
+    } else {
+        return null;
+    }
+}

@@ -4,6 +4,7 @@ require "../../Library/formHelpers.php";
 procesarRequest();
 
 ?>
+<script src="controller.js"></script>
 
 <h1>Formulario de edicion de ColoresTesteoNumero2ParaSaberSiFuncionaEsto</h1>
 
@@ -14,5 +15,10 @@ procesarRequest();
     </br>
     </br>
     <input type="submit" value="Guardar" formmethod="post" />
-    <input type="submit" value="Eliminar" />
+    <?php 
+    if($esModificacion == true){
+        $idColor = obtenerId($color);
+        echo "<input type='button' value='Eliminar' onclick='eliminar({$idColor})'/>";
+    }
+    ?>
 </form>

@@ -2,6 +2,7 @@
 
 require "../../Library/Database/database.php";
 $color = null;
+$esModificacion = false;
 
 // ---------------------------------------------------------------------------------------------------------------------------
 
@@ -30,7 +31,9 @@ function procesarRequest() {
         // Obtener Query
         if(isset($_GET['Id'])) {
             global $color;
+            global $esModificacion;
             $idColor = $_GET['Id'];
+            $esModificacion = true;
             $color = traerPorId($idColor);
         } 
     }
@@ -42,6 +45,19 @@ function procesarRequest() {
         }
         header("Location: vistaListado.php");
         exit;
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------------
+
+function procesarBaja() {
+    $metodo = $_SERVER['REQUEST_METHOD'];
+
+    if($metodo == 'GET') {
+        if(isset($_GET['Id'])) {
+            $idColor = $_GET['Id'];
+            eliminar($idColor);
+        }
     }
 }
 
@@ -63,8 +79,8 @@ function modificar() {
 
 // ---------------------------------------------------------------------------------------------------------------------------
 
-function eliminar(){
-
+function eliminar($idColor){
+    ejecutarSql("DELETE FROM coloresgatos WHERE Id = {$idColor}");
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------
