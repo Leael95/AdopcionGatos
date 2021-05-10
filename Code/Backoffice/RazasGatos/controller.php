@@ -1,7 +1,7 @@
 <?php
 
 require "../../Library/Database/database.php";
-procesarRequest();
+$raza = null;
 
 // ---------------------------------------------------------------------------------------------------------------------------
 
@@ -28,14 +28,14 @@ function procesarRequest() {
 
     if($metodo == 'GET') {
         // Obtener Query
-        if (isset($_GET['Id'])) {
-            echo 'modificacion';
-        } else {
-            echo 'alta';
-        }
+        if(isset($_GET['Id'])) {
+            global $raza;
+            $idRaza = $_GET['Id'];
+            $raza = traerPorId($idRaza);
+        } 
     }
     if($metodo == 'POST') {
-        if (isset($_POST['id'])) {
+        if(isset($_POST['Id']) && $_POST['Id'] != null){
             modificar();
         } else {
             crear();
@@ -55,7 +55,10 @@ function crear() {
 // ---------------------------------------------------------------------------------------------------------------------------
 
 function modificar() {
-
+    $idRaza = $_POST['Id'];
+    $raza = traerPorId($idRaza);
+    $raza['Nombre'] = $_POST['razaGato'];
+    ejecutarSql("UPDATE razasgatos SET Nombre = '{$raza['Nombre']}' WHERE Id = {$idRaza}");
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 <?php
 
 require "../../Library/Database/database.php";
-procesarRequest();
+$estado = null;
 
 // ---------------------------------------------------------------------------------------------------------------------------
 
@@ -29,13 +29,13 @@ function procesarRequest() {
     if($metodo == 'GET') {
         // Obtener Query
         if(isset($_GET['Id'])) {
-            echo 'modificacion';
-        } else {
-            echo 'alta';
-        }
+            global $estado;
+            $idEstado = $_GET['Id'];
+            $estado = traerPorId($idEstado);
+        } 
     }
     if($metodo == 'POST') {
-        if(isset($_POST['Id'])){
+        if(isset($_POST['Id']) && $_POST['Id'] != null){
             modificar();
         } else {
             crear();
@@ -48,14 +48,17 @@ function procesarRequest() {
 // ---------------------------------------------------------------------------------------------------------------------------
 
 function crear() {
-    $nombreEstado = $_POST['nombreEstado'];
-    ejecutarSql("INSERT INTO estadosgato (Nombre) VALUES ('{$nombreEstado}')");
+    $estadosGato = $_POST['estadosGato'];
+    ejecutarSql("INSERT INTO estadosgato (Nombre) VALUES ('{$estadosGato}')");
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------
 
 function modificar() {
-
+    $idEstado = $_POST['Id'];
+    $estado = traerPorId($idEstado);
+    $estado['Nombre'] = $_POST['estadosGato'];
+    ejecutarSql("UPDATE estadosgato SET Nombre = '{$estado['Nombre']}' WHERE Id = {$idEstado}");
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------
