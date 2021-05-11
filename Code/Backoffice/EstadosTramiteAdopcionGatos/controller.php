@@ -2,6 +2,7 @@
 
 require "../../Library/Database/database.php";
 $ETAG = null;
+$esModificacion = false;
 
 // ---------------------------------------------------------------------------------------------------------------------------
 
@@ -30,7 +31,9 @@ function procesarRequest() {
         // Obtener Query
         if(isset($_GET['Id'])) {
             global $ETAG;
+            global $esModificacion;
             $idETAG = $_GET['Id'];
+            $esModificacion = true;
             $ETAG = traerPorId($idETAG);
         }
     }
@@ -42,6 +45,19 @@ function procesarRequest() {
         }
         header("Location: vistaListado.php");
         exit;
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------------
+
+function procesarBaja() {
+    $metodo = $_SERVER['REQUEST_METHOD'];
+
+    if($metodo == 'GET') {
+        if(isset($_GET['Id'])) {
+            $idETAG = $_GET['Id'];
+            eliminar($idETAG);
+        }
     }
 }
 
@@ -63,8 +79,8 @@ function modificar() {
 
 // ---------------------------------------------------------------------------------------------------------------------------
 
-function eliminar(){
-
+function eliminar($idETAG){
+    ejecutarSql("DELETE FROM estadostramiteadopcion WHERE Id = {$idETAG}");
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------

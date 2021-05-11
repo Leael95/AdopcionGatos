@@ -28,7 +28,7 @@ $listadoEstadoTramiteAdopcion = listar();
             </td>
             <td>
                 <input type="button" value="Modificar" onclick="mostrarFormularioModificarETAG(<?php echo $estadoTramiteAdopcionGato['Id']?>)">
-                <input type="button" value="Eliminar">
+                <input type="button" value="Eliminar" onclick="eliminar(<?php echo $estadoTramiteAdopcionGato['Id']?>)">
             </td>
         </tr>
     <?php endwhile; ?>

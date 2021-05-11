@@ -2,6 +2,7 @@
 
 require "../../Library/Database/database.php";
 $vacuna = null;
+$esModificacion = false;
 
 // ---------------------------------------------------------------------------------------------------------------------------
 
@@ -30,7 +31,9 @@ function procesarRequest() {
         // Obtener Query
         if(isset($_GET['Id'])) {
             global $vacuna;
+            global $esModificacion;
             $idVacuna = $_GET['Id'];
+            $esModificacion = true;
             $vacuna = traerPorId($idVacuna);
         } 
     }
@@ -42,6 +45,19 @@ function procesarRequest() {
         }
         header("Location: vistaListado.php");
         exit;
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------------
+
+function procesarBaja() {
+    $metodo = $_SERVER['REQUEST_METHOD'];
+
+    if($metodo == 'GET') {
+        if(isset($_GET['Id'])) {
+            $idVacuna = $_GET['Id'];
+            eliminar($idVacuna);
+        }
     }
 }
 
@@ -65,8 +81,8 @@ function modificar() {
 
 // ---------------------------------------------------------------------------------------------------------------------------
 
-function eliminar(){
-
+function eliminar($idVacuna){
+    ejecutarSql("DELETE FROM vacunas WHERE Id = {$idVacuna}");
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------

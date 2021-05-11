@@ -28,7 +28,7 @@ $listadoVacunas = listar();
             </td>
             <td>
                 <input type="button" value="Modificar" onclick="mostrarFormularioModificarVacunas(<?php echo $vacunasGato['Id']?>)">
-                <input type="button" value="Eliminar">
+                <input type="button" value="Eliminar" onclick="eliminar(<?php echo $vacunasGato['Id']?>)">
             </td>
         </tr>
     <?php endwhile; ?>
