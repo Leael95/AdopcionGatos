@@ -14,20 +14,33 @@ function mostrarListado() {
     window.location.href = "vistaListado.php";
 }
 
-function validarDatos() {
-    let txtNombreVacuna = document.getElementById("nombreVacuna");
-    let txtDescripcionVacuna = document.getElementById("descripcionVacuna");
+function enviar() {
     let formulario = document.getElementById("formEditarVacunas");
+    let validaciones = [
+        estaVacio("nombreVacuna"),
+        estaVacio("descripcionVacuna")];
 
-    if(txtNombreVacuna.value == "" ) {
-        let mensajeError = document.getElementById("msjErrorNombreVacuna");
+    
+    if(!validaciones.some(invalido => invalido == true)) {
+            
+            formulario.submit();
+
+    }
+}
+
+function estaVacio(nombreCampo) {
+    let resultado = false;
+    let txt = document.getElementById(nombreCampo);
+    let mensajeError = document.getElementById("msjError" + nombreCampo);
+
+    if(txt.value == ""){
         mensajeError.classList.add("msjErrorVisible");
         mensajeError.classList.remove("msjErrorInvisible");
-    } else if(txtDescripcionVacuna.value == "") {
-        let mensajeErrorDescripcion = document.getElementById("msjErrorDescripcionVacuna");
-        mensajeErrorDescripcion.classList.add("msjErrorVisible");
-        mensajeErrorDescripcion.classList.remove("msjErrorInvisible");
+        resultado = true;
     } else {
-        formulario.submit();
+        mensajeError.classList.add("msjErrorInvisible");
+        mensajeError.classList.remove("msjErrorVisible");
     }
+
+    return resultado;
 }
