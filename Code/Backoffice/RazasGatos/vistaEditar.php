@@ -6,14 +6,23 @@ procesarRequest();
 
 ?>
 
+<link rel="stylesheet" href="../Assets/Styles/formStyles.css">
+<script src="controller.js"></script>
+
 <h1>Formulario de edicion de Raza</h1>
 
-<form action="vistaEditar.php" method="post">
+<form id="formEditarRazaGato" action="vistaEditar.php" method="post">
     <input type="hidden" value="<?php mostrarId($raza) ?>" name="Id" id="Id">
     <label for="razaGato">Raza Gato</label>
     <input type="text" id="razaGato" name="razaGato" value="<?php mostrarCampoTexto($raza,'Nombre') ?>" />
+    <span id="msjErrorRazaGato" class="msjErrorInvisible">Este campo es obligatorio</span>
     </br>
     </br>
-    <input type="submit" value="Guardar" formmethod="post" />
-    <input type="submit" value="Eliminar" />
+    <input type="button" value="Guardar" onclick="validarDatos()" />
+    <?php
+    if($esModificacion == true) {
+        $idRaza = obtenerId($raza);
+        echo "<input type='button' value='Eliminar' onclick='eliminar({$idRaza})'/>";
+    }
+    ?>
 </form>

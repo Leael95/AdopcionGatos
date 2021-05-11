@@ -2,6 +2,7 @@
 
 require "../../Library/Database/database.php";
 $raza = null;
+$esModificacion = false;
 
 // ---------------------------------------------------------------------------------------------------------------------------
 
@@ -30,7 +31,9 @@ function procesarRequest() {
         // Obtener Query
         if(isset($_GET['Id'])) {
             global $raza;
+            global $esModificacion;
             $idRaza = $_GET['Id'];
+            $esModificacion = true;
             $raza = traerPorId($idRaza);
         } 
     }
@@ -42,6 +45,19 @@ function procesarRequest() {
         }
         header("Location: vistaListado.php");
         exit;
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------------
+
+function procesarBaja() {
+    $metodo = $_SERVER['REQUEST_METHOD'];
+
+    if($metodo == 'GET') {
+        if(isset($_GET['Id'])) {
+            $idRaza = $_GET['Id'];
+            eliminar($idRaza);
+        }
     }
 }
 
@@ -63,8 +79,8 @@ function modificar() {
 
 // ---------------------------------------------------------------------------------------------------------------------------
 
-function eliminar(){
-
+function eliminar($idRaza){
+    ejecutarSql("DELETE FROM razasgatos WHERE Id = {$idRaza}");
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------
