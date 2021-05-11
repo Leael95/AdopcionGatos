@@ -2,6 +2,7 @@
 
 require "../../Library/Database/database.php";
 $estado = null;
+$esModificacion = false;
 
 // ---------------------------------------------------------------------------------------------------------------------------
 
@@ -30,7 +31,9 @@ function procesarRequest() {
         // Obtener Query
         if(isset($_GET['Id'])) {
             global $estado;
+            global $esModificacion;
             $idEstado = $_GET['Id'];
+            $esModificacion = true;
             $estado = traerPorId($idEstado);
         } 
     }
@@ -42,6 +45,19 @@ function procesarRequest() {
         }
         header("Location: vistaListado.php");
         exit;
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------------
+
+function procesarBaja() {
+    $metodo = $_SERVER['REQUEST_METHOD'];
+
+    if($metodo == 'GET') {
+        if(isset($_GET['Id'])) {
+            $idEstado = $_GET['Id'];
+            eliminar($idEstado);
+        }
     }
 }
 
@@ -63,8 +79,8 @@ function modificar() {
 
 // ---------------------------------------------------------------------------------------------------------------------------
 
-function eliminar(){
-
+function eliminar($idEstado){
+    ejecutarSql("DELETE FROM estadosgato WHERE Id = {$idEstado}");
 }
 
 // ---------------------------------------------------------------------------------------------------------------------------

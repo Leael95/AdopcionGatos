@@ -28,7 +28,7 @@ $listadoRazas = listar();
             </td>
             <td>
                 <input type="button" value="Modificar" onclick="mostrarFormularioModificarRaza(<?php echo $razaGato['Id']?>)">
-                <input type="button" value="Eliminar">
+                <input type="button" value="Eliminar" onclick="eliminar(<?php echo $razaGato ['Id']?>)">
             </td>
         </tr>
     <?php endwhile; ?>
