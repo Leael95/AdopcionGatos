@@ -7,6 +7,7 @@ procesarRequest();
 
 <link rel="stylesheet" href="../Assets/Styles/formStyles.css">
 <script src="../Assets/Library/Vendors/jquery-3.6.0.js"></script>
+<script src="../Assets/Library/Vendors/parsley.min.js"></script>
 <script src="../Assets/Library/formHelpers.js"></script>
 <script src="controller.js"></script>
 
@@ -15,11 +16,14 @@ procesarRequest();
 <form id="formEditarColorGato" action="vistaEditar.php" method="post">
     <input type="hidden" value="<?php mostrarId($color) ?>" name="Id" id="Id">
     <label for="nombreColor">Color Gato</label>
-    <input type="text" id="nombreColor" name="nombreColor" value="<?php mostrarCampoTexto($color,'Nombre') ?>" />
+    <input id="nombreColor" type="text" name="nombreColor" value="<?php mostrarCampoTexto($color,'Nombre') ?>" 
+        data-parsley-trigger="keyup"
+        required="" 
+        data-parsley-maxlength="3" />
     <span id="msjErrornombreColor" class="msjErrorInvisible">Este campo es obligatorio</span>
     </br>
     </br>
-    <input id="btnGuardar" type="button" value="Guardar"  />
+    <input id="btnGuardar" type="submit" value="Guardar"  />
     <?php 
     if($esModificacion == true){
         $idColor = obtenerId($color);
@@ -27,3 +31,7 @@ procesarRequest();
     }
     ?>
 </form>
+
+<script>
+  $('#formEditarColorGato').parsley();
+</script>

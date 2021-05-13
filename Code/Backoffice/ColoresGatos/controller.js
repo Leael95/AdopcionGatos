@@ -42,12 +42,12 @@ function enviar() {
     }
 }
 
-$(document).ready(function() {
-    console.log("leaLoaded");
-    $("#btnGuardar").click(function(event) {
-        console.log(event);
-        // enviar();
-        $("#btnGuardar").attr("value","Me apretaron");
+// $(document).ready(function() {
+//     console.log("leaLoaded");
+//     $("#btnGuardar").click(function(event) {
+//         console.log(event);
+//         // enviar();
+//         $("#btnGuardar").attr("value","Me apretaron");
 
-    }) 
-});
+//     }) 
+// });
