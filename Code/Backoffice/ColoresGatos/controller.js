@@ -14,15 +14,30 @@ function mostrarListado() {
     window.location.href = "vistaListado.php";
 }
 
-function validarDatos() {
-    let txtNombreColor = document.getElementById("nombreColor");
-    let formulario = document.getElementById("formEditarColorGato");
+// function validarDatos() {
+//     let txtNombreColor = document.getElementById("nombreColor");
+//     let formulario = document.getElementById("formEditarColorGato");
 
-    if(txtNombreColor.value == "") {
-        let mensajeError = document.getElementById("msjErrorNombreColor");
-        mensajeError.classList.add("msjErrorVisible");
-        mensajeError.classList.remove("msjErrorInvisible");
-    } else {
-        formulario.submit();
+//     if(txtNombreColor.value == "") {
+//         let mensajeError = document.getElementById("msjErrorNombreColor");
+//         mensajeError.classList.add("msjErrorVisible");
+//         mensajeError.classList.remove("msjErrorInvisible");
+//     } else {
+//         formulario.submit();
+//     }
+// }
+
+function enviar() {
+    let formulario = document.getElementById("formEditarColorGato");
+    let validaciones = [
+        iniciarValidacion("nombreColor"),
+        estaVacio("nombreColor"),
+        validarLongitudMaxima("nombreColor", 5)];
+
+    
+    if(!validaciones.some(invalido => invalido == true)) {
+            
+            formulario.submit();
+
     }
 }

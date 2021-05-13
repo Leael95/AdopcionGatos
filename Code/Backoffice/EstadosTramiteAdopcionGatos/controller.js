@@ -14,15 +14,30 @@ function mostrarListado() {
     window.location.href = "vistaListado.php";
 }
 
-function validarDatos() {
-    let txtNombreETAG = document.getElementById("estadosTramiteAdopcion");
-    let formulario = document.getElementById("formEditarETAG");
+// function validarDatos() {
+//     let txtNombreETAG = document.getElementById("estadosTramiteAdopcion");
+//     let formulario = document.getElementById("formEditarETAG");
 
-    if(txtNombreETAG.value == "") {
-        let mensajeError = document.getElementById("msjErrorETAG");
-        mensajeError.classList.add("msjErrorVisible");
-        mensajeError.classList.remove("msjErrorInvisible");
-    } else {
-        formulario.submit();
+//     if(txtNombreETAG.value == "") {
+//         let mensajeError = document.getElementById("msjErrorETAG");
+//         mensajeError.classList.add("msjErrorVisible");
+//         mensajeError.classList.remove("msjErrorInvisible");
+//     } else {
+//         formulario.submit();
+//     }
+// }
+
+function enviar() {
+    let formulario = document.getElementById("formEditarETAG");
+    let validaciones = [
+        iniciarValidacion("estadosTramiteAdopcion"),
+        estaVacio("estadosTramiteAdopcion"),
+        validarLongitudMaxima("estadosTramiteAdopcion", 5)];
+
+    
+    if(!validaciones.some(invalido => invalido == true)) {
+            
+            formulario.submit();
+
     }
 }

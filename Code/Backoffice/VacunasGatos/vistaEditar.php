@@ -6,6 +6,7 @@ procesarRequest();
 ?>
 
 <link rel="stylesheet" href="../Assets/Styles/formStyles.css">
+<script src="../Assets/Library/formHelpers.js"></script>
 <script src="controller.js"></script>
 
 <h1>Formulario de edicion de Vacunas</h1>
