@@ -1,7 +1,3 @@
-var imported = document.createElement('script');
-imported.src = '../Assets/Library/formHelpers.js';
-document.head.appendChild(imported);
-
 function mostrarFormularioAltaRazas() {
     window.location.href = 'vistaEditar.php';
 }
