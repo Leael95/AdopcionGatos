@@ -14,15 +14,17 @@ function mostrarListado() {
     window.location.href = "vistaListado.php";
 }
 
-function validarDatos() {
-    let txtRazaGato = document.getElementById("razaGato");
+function enviar() {
     let formulario = document.getElementById("formEditarRazaGato");
+    let validaciones = [
+        iniciarValidacion("razaGato"),
+        estaVacio("razaGato"),
+        validarLongitudMaxima("razaGato", 5)];
 
-    if(txtRazaGato.value == "") {
-        let mensajeError = document.getElementById("msjErrorRazaGato");
-        mensajeError.classList.add("msjErrorVisible");
-        mensajeError.classList.remove("msjErrorInvisible");
-    } else {
-        formulario.submit();
+    
+    if(!validaciones.some(invalido => invalido == true)) {
+            
+            formulario.submit();
+
     }
 }
