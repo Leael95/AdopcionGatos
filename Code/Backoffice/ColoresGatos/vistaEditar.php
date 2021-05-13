@@ -6,6 +6,7 @@ procesarRequest();
 ?>
 
 <link rel="stylesheet" href="../Assets/Styles/formStyles.css">
+<script src="../Assets/Library/Vendors/jquery-3.6.0.js"></script>
 <script src="../Assets/Library/formHelpers.js"></script>
 <script src="controller.js"></script>
 
@@ -18,7 +19,7 @@ procesarRequest();
     <span id="msjErrornombreColor" class="msjErrorInvisible">Este campo es obligatorio</span>
     </br>
     </br>
-    <input type="button" value="Guardar" onclick="enviar()" />
+    <input id="btnGuardar" type="button" value="Guardar"  />
     <?php 
     if($esModificacion == true){
         $idColor = obtenerId($color);
