@@ -17,5 +17,5 @@ Herramientas utilizadas:
 
 
 Este es el conflicto de un texto que estoy cambiando y creando a la vez :v
-Puedo escribir otra linea mas
+Puedo escribir otra linea mas hola soy nanshiro al final
 Osiosi la tercera
