@@ -1,3 +1,20 @@
+// function enviar() {
+//     let formulario = document.getElementById("formEditarVacunas");
+//     let validaciones = [
+//         iniciarValidacion("nombreVacuna"),
+//         estaVacio("nombreVacuna"),
+//         validarLongitudMaxima("nombreVacuna", 5),
+//         iniciarValidacion("descripcionVacuna"),
+//         estaVacio("descripcionVacuna")];
+
+    
+//     if(!validaciones.some(invalido => invalido == true)) {
+            
+//             formulario.submit();
+
+//     }
+// }
+
 function estaVacio(nombreCampo) {
     let resultado = false;
     let txt = document.getElementById(nombreCampo);

@@ -20,6 +20,8 @@ function enviar() {
         iniciarValidacion("razaGato"),
         estaVacio("razaGato"),
         validarLongitudMaxima("razaGato", 5)];
+        // iniciarValidacion("descripcionVacuna"),
+        // estaVacio("descripcionVacuna")];
 
     
     if(!validaciones.some(invalido => invalido == true)) {
