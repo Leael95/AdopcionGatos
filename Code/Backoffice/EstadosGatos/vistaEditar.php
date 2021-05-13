@@ -7,6 +7,7 @@ procesarRequest();
 ?>
 
 <link rel="stylesheet" href="../Assets/Styles/formStyles.css">
+<script src="../Assets/Library/formHelpers.js"></script>
 <script src="controller.js"></script>
 
 <h1>Formulario de edicion Estados Gatos</h1>
@@ -15,10 +16,10 @@ procesarRequest();
     <input type="hidden" value="<?php mostrarId($estado) ?>" name="Id" id="Id">
     <label for="estadosGato">Estado del Gato</label>
     <input type="text" id="estadosGato" name="estadosGato" value="<?php mostrarCampoTexto($estado,'Nombre') ?>" />
-    <span id="msjErrorEstadosGato" class="msjErrorInvisible">Este campo es obligatorio</span>
+    <span id="msjErrorestadosGato" class="msjErrorInvisible">Este campo es obligatorio</span>
     </br>
     </br>
-    <input type="button" value="Guardar" onclick="validarDatos()" />
+    <input type="button" value="Guardar" onclick="enviar()" />
     <?php
     if($esModificacion == true) {
         $idEstado = obtenerId($estado);
