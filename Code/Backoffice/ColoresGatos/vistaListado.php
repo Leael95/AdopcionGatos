@@ -9,7 +9,7 @@ $listadoColores = listar();
 
 
    <div class="container-fluid d-flex flex-column align-items-center">
-    <h1 class="text-center">Vista Listado</h1>
+    <h1 class="text-center text-uppercase">Vista Listado</h1>
 
         <br>
 
@@ -20,8 +20,8 @@ $listadoColores = listar();
 
         <table>
         <head>
-            <th class="text-center">Color</th>
-            <th class="text-center">Acciones</th>
+            <th class="text-center text-uppercase">Color</th>
+            <th class="text-center text-uppercase">Acciones</th>
         </head>
         <body>
         <?php while($colorGato = mysqli_fetch_assoc($listadoColores)) : ?>
@@ -37,4 +37,7 @@ $listadoColores = listar();
         <?php endwhile; ?>
         </body>
         </table>
+
+        <input id="botonPrueba" type="button" value="Prueba" onclick="enviarDatosAlServidor()" />
    </div>
+
