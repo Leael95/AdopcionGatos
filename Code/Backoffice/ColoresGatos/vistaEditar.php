@@ -8,7 +8,6 @@ procesarRequest();
 <link rel="stylesheet" href="../Assets/Styles/formStyles.css">
 <script src="../Assets/Library/Vendors/jquery-3.6.0.js"></script>
 <script src="../Assets/Library/Vendors/parsley.min.js"></script>
-<script src="../Assets/Library/formHelpers.js"></script>
 <script src="controller.js"></script>
 
 <h1>Formulario de edicion de Colores</h1>
@@ -19,7 +18,7 @@ procesarRequest();
     <input id="nombreColor" type="text" name="nombreColor" value="<?php mostrarCampoTexto($color,'Nombre') ?>" 
         data-parsley-trigger="keyup"
         required="" 
-        data-parsley-maxlength="3" />
+        data-parsley-maxlength="10" />
     <span id="msjErrornombreColor" class="msjErrorInvisible">Este campo es obligatorio</span>
     </br>
     </br>
