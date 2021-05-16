@@ -68,9 +68,3 @@ function pepito2(nombre2) {
 function botonPrueba() {
     prueba(pepito2);
 }
-
-function enviarDatosAlServidor() {
-    setTimeout(() => {
-        console.log("Hola desde inline");
-    } , 5000);
-}
