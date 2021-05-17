@@ -13,8 +13,7 @@ function procesarRequest() {
 
             $idGato = $_GET['id'];
             $gato = traerGatoId($idGato);
-            
-            header('Location: vistaEditar.php');
+            // header('Location: vistaEditar.php');
         }
     }
 
@@ -39,8 +38,8 @@ function vistaListado() {
 //------------------------------------------------------------------------------------------------------------------------------------
 
 function traerGatoId($id) {
-    $resultado = ejecutarSql("SELECT * FROM Gatos WHERE Id = {$id}");
-    $gatoSeleccionado = mysqli_fetch_row($resultado);
+    $resultado = ejecutarSql("SELECT * FROM gatos WHERE Id = {$id}");
+    $gatoSeleccionado = $resultado->fetch_assoc();
 
     return $gatoSeleccionado;
 }
