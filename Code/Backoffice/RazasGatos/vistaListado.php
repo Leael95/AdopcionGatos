@@ -1,7 +1,7 @@
 <?php // --------------------------------------------
 
 require "controller.php";
-$listadoRazas = listar();
+$listadoGatos = listar();
 
 // -------------------------------------------------- ?> 
 <script src="controller.js"></script>

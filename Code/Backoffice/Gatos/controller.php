@@ -8,12 +8,12 @@ $gato = null;
 function procesarRequest() {
     if($_SERVER['REQUEST_METHOD'] == 'GET') {
         $existeId = array_key_exists('id',$_GET);
-        if($existeId == false) {
-            // header('Location: vistaEditar.php');
-        } else {
+        if($existeId == true) {
             global $gato;
+
             $idGato = $_GET['id'];
             $gato = traerGatoId($idGato);
+            
             header('Location: vistaEditar.php');
         }
     }
@@ -47,6 +47,30 @@ function traerGatoId($id) {
 
 //------------------------------------------------------------------------------------------------------------------------------------
 
+function listarRazas() {
+    $resultado = ejecutarSql("SELECT * FROM razasgatos");
+
+    return $resultado;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------
+
+function listarColores() {
+    $resultado = ejecutarSql("SELECT * FROM coloresgatos");
+
+    return $resultado;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------
+
+function listarEstados() {
+    $resultado = ejecutarSql("SELECT * FROM estadosgato");
+
+    return $resultado;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------
+
 function listarGatos() {
     $resultado = ejecutarSql("SELECT * FROM Gatos");
 
@@ -57,7 +81,7 @@ function listarGatos() {
 //------------------------------------------------------------------------------------------------------------------------------------
 
 function crearGato() {
-     $nombreGato = $_POST['nombreGato'];
+    $nombreGato = $_POST['nombreGato'];
     $edadGato = $_POST['edadGato'];
     $pesoGato = $_POST['pesoGato'];
     $idRaza = $_POST['idRaza'];
