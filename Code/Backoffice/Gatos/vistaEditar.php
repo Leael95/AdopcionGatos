@@ -5,12 +5,12 @@
 
 <h1>Vista Editar Gatos</h1>
 
-<form id="formularioGatos" method="POST">
+<form id="formularioGatos" action="vistaEditar.php" method="post">
     <label for="nombreGato">Nombre</label>
     <input id="nombreGato" name="nombreGato" type="text"> </br>
 
     <label for="edadGato">Edad</label>
-    <input id="edadGato" name="edadgato" type="text"></br>
+    <input id="edadGato" name="edadGato" type="text"></br>
 
     <label for="pesoGato">Peso</label>
     <input id="pesoGato" name="pesoGato" type="text"></br>

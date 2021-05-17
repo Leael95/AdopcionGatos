@@ -19,12 +19,12 @@ function procesarRequest() {
     }
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $idGato = $_POST['id'];
-        if($idGato == null) {
-            crearGato();
+        $existeId = array_key_exists('id',$_POST);
+        if($existeId == true) {
+            modificarGato();
             vistaListado();
         } else {
-            modificarGato();
+            crearGato();
             vistaListado();
         }
     }
@@ -57,7 +57,7 @@ function listarGatos() {
 //------------------------------------------------------------------------------------------------------------------------------------
 
 function crearGato() {
-    $nombreGato = $_POST['nombreGato'];
+     $nombreGato = $_POST['nombreGato'];
     $edadGato = $_POST['edadGato'];
     $pesoGato = $_POST['pesoGato'];
     $idRaza = $_POST['idRaza'];
