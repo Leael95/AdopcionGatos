@@ -5,6 +5,7 @@
     $listadoRazas = listarRazas();
     $listadoColores = listarColores();
     $listadoEstados = listarEstados();
+    $listadoVacunas = listarVacunas();
 
     procesarRequest();
 ?>
@@ -29,7 +30,7 @@
         <?php while ($razaGato = mysqli_fetch_assoc($listadoRazas)) : ?>
             <option 
                 value="<?php echo $razaGato['Id'] ?>" 
-                <?php if($razaGato['Id'] == $gato['IdRaza']) {
+                <?php if($gato != null && $razaGato['Id'] == $gato['IdRaza']) {
                     echo ' selected';
                 } ?> >
                 <?php echo $razaGato['Nombre']  ?>
@@ -42,7 +43,7 @@
         <?php while ($colorGato = mysqli_fetch_assoc($listadoColores)) : ?>
             <option 
                 value="<?php echo $colorGato['Id'] ?>" 
-                <?php if($colorGato['Id'] == $gato['IdColor']) {
+                <?php if($gato != null && $colorGato['Id'] == $gato['IdColor']) {
                     echo ' selected';
                 } ?> >
                 <?php echo $colorGato['Nombre'] ?>
@@ -53,9 +54,9 @@
     <label for="idEstadoGato">Estado Gato</label>
     <select id="idEstadoGato" name="idEstadoGato" >
         <?php while ($estadoGato = mysqli_fetch_assoc($listadoEstados)) : ?>
-            <option 
-                value="<?php echo $estadoGato['Id'] ?>" 
-                <?php if($estadoGato['Id'] == $gato['IdEstadoGato']) {
+            <option
+                value="<?php echo $estadoGato['Id'] ?>"
+                <?php if($gato != null && $estadoGato['Id'] == $gato['IdEstadoGato']) {
                     echo ' selected';
                 } ?> >
                 <?php echo $estadoGato['Nombre'] ?>
@@ -64,7 +65,27 @@
     </select> </br></br>
 
     <label for="pathFotos">Foto</label>
-    <input id="pathFotos" name="pathFotos" type="text" value="<?php mostrarCampoTexto($gato, 'PathFotos'); ?>"></br></br>
+    <input id="pathFotos" name="pathFotos" type="text" value="<?php mostrarCampoTexto($gato, 'PathFotos'); ?>"></br>
+
+    <h3>Vacunas</h3>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Vacuna</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while($vacuna = mysqli_fetch_assoc($listadoVacunas)) : ?>
+            <tr>
+                <td><input id="vacunas[<?php echo $vacuna['Id']?>]" name="vacunas[<?php echo $vacuna['Id']?>]" type="checkbox" value="<?php echo $vacuna['Id'] ?>"></td>
+                <td><?php echo $vacuna['Nombre']; ?></td>
+                <td><input id="fechaVacunas[<?php echo $vacuna['Id']?>]" name="fechaVacunas[<?php echo $vacuna['Id']?>]" type="date"></td>
+            </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
 
     <input id="botonEnviar" type="submit" value="Enviar"></br>
     

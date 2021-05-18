@@ -23,6 +23,16 @@ function ejecutarSql($sentenciaSql) {
     return $resultado;
 }
 
+function insertAndRetrieveId($sentenciaSql) {
+
+    global $conexionActiva;
+    mysqli_query($conexionActiva, $sentenciaSql);
+
+    $last_id = mysqli_insert_id($conexionActiva);
+
+    return $last_id;
+}
+
 function desconectarBD() {
     global $conexionActiva;
     mysqli_close($conexionActiva);

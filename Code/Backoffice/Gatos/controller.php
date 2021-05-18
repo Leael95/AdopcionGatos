@@ -2,6 +2,7 @@
 require "../../Library/Database/database.php";
 
 $gato = null;
+$listadoVacunas = null;
 
 //------------------------------------------------------------------------------------------------------------------------------------
 
@@ -13,19 +14,24 @@ function procesarRequest() {
 
             $idGato = $_GET['id'];
             $gato = traerGatoId($idGato);
-            // header('Location: vistaEditar.php');
+        } else {
+            global $listadoVacunas;
+
+            // $listadoVacunas = listarVacunas();
         }
     }
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $existeId = array_key_exists('id',$_POST);
-        if($existeId == true) {
-            modificarGato();
-            vistaListado();
-        } else {
-            crearGato();
-            vistaListado();
-        }
+        crearGato();
+        
+        // $existeId = array_key_exists('id',$_POST);
+        // if($existeId == true) {
+        //     modificarGato();
+        //     // vistaListado();
+        // } else {
+        //     crearGato();
+        //     // vistaListado();
+        // }
     }
 }
 
@@ -70,6 +76,14 @@ function listarEstados() {
 
 //------------------------------------------------------------------------------------------------------------------------------------
 
+function listarVacunas() {
+    $resultado = ejecutarSql("SELECT * FROM vacunas");
+
+    return $resultado;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------
+
 function listarGatos() {
     $resultado = ejecutarSql("SELECT * FROM Gatos");
 
@@ -80,6 +94,7 @@ function listarGatos() {
 //------------------------------------------------------------------------------------------------------------------------------------
 
 function crearGato() {
+
     $nombreGato = $_POST['nombreGato'];
     $edadGato = $_POST['edadGato'];
     $pesoGato = $_POST['pesoGato'];
@@ -88,7 +103,15 @@ function crearGato() {
     $idEstadoGato = $_POST['idEstadoGato'];
     $pathFotos = $_POST['pathFotos'];
 
-    ejecutarSql("INSERT INTO Gatos (Nombre, Edad, Peso, IdRaza, IdColor, IdEstadoGato, PathFotos) VALUES ('{$nombreGato}',{$edadGato},{$pesoGato},{$idRaza},{$idColor},{$idEstadoGato},'{$pathFotos}')");
+    $idGatoCreado = insertAndRetrieveId("INSERT INTO Gatos (Nombre, Edad, Peso, IdRaza, IdColor, IdEstadoGato, PathFotos) VALUES ('{$nombreGato}',{$edadGato},{$pesoGato},{$idRaza},{$idColor},{$idEstadoGato},'{$pathFotos}')");
+    $fechaVacunasGato = $_POST['fechaVacunas'];
+
+
+    $vacunasGato = $_POST['vacunas'];
+    foreach ($vacunasGato as $idVacuna) {
+        $fechaVacuna = $fechaVacunasGato[$idVacuna];
+        ejecutarSql("INSERT INTO vacunasxgatos (IdVacuna, IdGato, Fecha) VALUES ('{$vacunasGato}', {$idGatoCreado}, {$fechaVacuna})");
+    }
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
