@@ -103,15 +103,25 @@ function crearGato() {
     $idEstadoGato = $_POST['idEstadoGato'];
     $pathFotos = $_POST['pathFotos'];
 
-    $idGatoCreado = insertAndRetrieveId("INSERT INTO Gatos (Nombre, Edad, Peso, IdRaza, IdColor, IdEstadoGato, PathFotos) VALUES ('{$nombreGato}',{$edadGato},{$pesoGato},{$idRaza},{$idColor},{$idEstadoGato},'{$pathFotos}')");
-    $fechaVacunasGato = $_POST['fechaVacunas'];
+    try {
+        iniciarTransaccion();
 
+        $idGatoCreado = insertAndRetrieveId("INSERT INTO Gatos (Nombre, Edad, Peso, IdRaza, IdColor, IdEstadoGato, PathFotos) VALUES ('{$nombreGato}',{$edadGato},{$pesoGato},{$idRaza},{$idColor},{$idEstadoGato},'{$pathFotos}')");
 
-    $vacunasGato = $_POST['vacunas'];
-    foreach ($vacunasGato as $idVacuna) {
-        $fechaVacuna = $fechaVacunasGato[$idVacuna];
-        ejecutarSql("INSERT INTO vacunasxgatos (IdVacuna, IdGato, Fecha) VALUES ('{$vacunasGato}', {$idGatoCreado}, {$fechaVacuna})");
+        $fechaVacunasGato = $_POST['fechaVacunas'];
+        $vacunasGato = $_POST['vacunas'];
+
+        foreach ($vacunasGato as $idVacuna) {
+            $fechaVacuna = $fechaVacunasGato[$idVacuna];
+
+            ejecutarSql("INSERT INTO vacunasxgatos (IdVacuna, IdGato, Fecha) VALUES ({$idVacuna}, {$idGatoCreado}, '{$fechaVacuna}')");
+        }
+
+        commitearTransaccion();
+    } catch (Exception $e) {
+        rollbackTransaccion();
     }
+
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------

@@ -37,3 +37,18 @@ function desconectarBD() {
     global $conexionActiva;
     mysqli_close($conexionActiva);
 }
+
+function iniciarTransaccion() {
+    global $conexionActiva;
+    mysqli_begin_transaction($conexionActiva, MYSQLI_TRANS_START_READ_WRITE);
+}
+
+function commitearTransaccion() {
+    global $conexionActiva;
+    mysqli_commit($conexionActiva);
+}
+
+function rollbackTransaccion() {
+    global $conexionActiva;
+    mysqli_rollback($conexionActiva);
+}
