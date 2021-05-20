@@ -78,11 +78,18 @@
         </thead>
         <tbody>
             <?php while($vacuna = mysqli_fetch_assoc($listadoVacunas)) : ?>
-            <tr>
-                <td><input id="vacunas[<?php echo $vacuna['Id']?>]" name="vacunas[<?php echo $vacuna['Id']?>]" type="checkbox" value="<?php echo $vacuna['Id'] ?>"></td>
-                <td><?php echo $vacuna['Nombre']; ?></td>
-                <td><input id="fechaVacunas[<?php echo $vacuna['Id']?>]" name="fechaVacunas[<?php echo $vacuna['Id']?>]" type="date"></td>
-            </tr>
+                <tr>
+                    <td>
+                        <input id="vacunas[<?php echo $vacuna['Id']?>]" name="vacunas[<?php echo $vacuna['Id']?>]" type="checkbox" 
+                            value="<?php echo $vacuna['Id'] ?>" 
+                            <?php tildarSiFueAplicada($vacuna['Id'],$vacunasXGato) ?> />
+                    </td>
+                    <td><?php echo $vacuna['Nombre']; ?></td>
+                    <td>
+                        <input id="fechaVacunas[<?php echo $vacuna['Id']?>]" name="fechaVacunas[<?php echo $vacuna['Id']?>]" type="date" 
+                        value="<?php mostrarFechaSiFueAplicada($vacuna['Id'],$vacunasXGato) ?>">
+                    </td>
+                </tr>
             <?php endwhile; ?>
         </tbody>
     </table>

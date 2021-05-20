@@ -2,6 +2,8 @@
 require "../../Library/Database/database.php";
 
 $gato = null;
+$vacunasXGato = array();
+
 $listadoVacunas = null;
 
 //------------------------------------------------------------------------------------------------------------------------------------
@@ -11,9 +13,13 @@ function procesarRequest() {
         $existeId = array_key_exists('id',$_GET);
         if($existeId == true) {
             global $gato;
+            global $vacunasXGato;
 
             $idGato = $_GET['id'];
+
             $gato = traerGatoId($idGato);
+            $vacunasXGato = traerVacunasXIdGato($idGato);
+            var_dump($vacunasXGato);
         } else {
             global $listadoVacunas;
 
@@ -45,9 +51,45 @@ function vistaListado() {
 
 function traerGatoId($id) {
     $resultado = ejecutarSql("SELECT * FROM gatos WHERE Id = {$id}");
+
     $gatoSeleccionado = $resultado->fetch_assoc();
 
     return $gatoSeleccionado;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------
+
+function traerVacunasXIdGato($id) {
+    $resultadoVacunasXGatos = ejecutarSql("SELECT * FROM vacunasxgatos WHERE IdGato = {$id}");
+
+    $vacunasSeleccionadas = $resultadoVacunasXGatos->fetch_all(MYSQLI_ASSOC);
+
+    return $vacunasSeleccionadas;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------
+
+function tildarSiFueAplicada($idVacuna, $vacunasAplicadas) {
+
+    foreach($vacunasAplicadas as $vacunaAplicada) {
+
+        if($idVacuna == $vacunaAplicada['IdVacuna']) {
+            echo ' checked ';
+            break;
+        }
+    }
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------
+
+function mostrarFechaSiFueAplicada($idVacuna, $vacunasAplicadas) {
+    foreach($vacunasAplicadas as $vacunaAplicada) {
+
+        if($idVacuna == $vacunaAplicada['IdVacuna']) {
+            echo "{$vacunaAplicada['Fecha']}";
+            break;
+        }
+    }
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
