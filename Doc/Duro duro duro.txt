@@ -1,0 +1,55 @@
+Cuando mandemos las cosas a Master 
+1) Agregar las validaciones a todos los ABM Javascript
+1.1 - Definir las validaciones (Campos Obligatorios, Minimo, Maximo Letras...)
+1.2 - Definir estados iniciales 
+
+2) ABM de Gatos
+2.1 - Al dar de alta :
+	- Campo estado del Gato no se tiene que mostrar
+	- Gato se tiene que dar de alta como en adopcion por defecto
+	- Vacunas validar que si el checkbox esta validado tenga que poner fecha de vacuna 
+	- Cuando se destilde un checkbox que se borre la fecha
+	- Nombre es Obligatorio y no puede tener mas de 50 caracteres
+	- Edad es olbigatoria y solo puede ser numerica
+	- Peso es obligatorio y solo puede ser numerico
+	- Color es obligatorio
+	- Raza es Obligatoria
+	- Ignorar path
+	
+2.2 Modificar Gato
+	- Solo lectura la parte de Estado.
+	
+3) Tramite de Adopcion
+3.1 - Primero vamos a definir los estados posibles que no definimos
+3.1.1 - Solicitado, en evaluacion, aceptado, rechazado
+3.2: Historia Solicitar de Adopcion
+	-Postulante ingresa a la pagina de solicitar tramite de adopcion y completa los datos que le solicita el sistema:
+	1.Nro de Tramite(Generado automaticamente por el sistema), en esta etapa lo cargamos a mano
+	2.Nombre de Postulante(MAX 50)*
+	3.Apellido de Postulante(MAX 50)*
+	4.Gato a Adoptar: Lo tiene que elegir de la siguiente Tabla:
+		4.1.Tiene nombre de Gato, Raza, Color, Edad.
+		4.2.Elige el Checkbox de al lado del Gato.
+		4.3.Solo puede elegir un gato
+	5.Telefono (MAX 50)
+	6.Mail (MAX 50)
+	7.Direccion (MAX 50)*
+	8.Al presionar guardar o generar tramite el sistema va a registrar el tramite en el estado Solicitado.
+	9.Fecha de Estado fecha generada automaticamente y no se muestra.
+
+4) Evaluar tramite de adopcion.
+	4.1-El oficinista tiene que ingresar a la pantalla de Evaluacion de Tramite de Adopcion.
+	La pantalla de Evaluacion de Tramite de Adopcion tiene un encabezado con los siguientes filtros:
+	4.1.1-Estado de Tramite,Nro de Tramite, Fecha desde y fecha hasta.
+	4.2- Va a tener una tabla con los siguientes datos:
+	4.2.1 - Nro de Tramite , Nombre y Apellido del postulante en una sola columna , Estado del Tramite, Nombre del Gato
+	4.3- La persona selecciona un tramite del listado, y el sistema va a mostrar los detalles del tramite.
+	4.4 A partir de este punto el oficinista puede hacer 3 cosas 
+	4.4.1 - Indicar que el tramite esta en evaluacion
+	4.4.2 - Indicar que el tramite esta aceptado 
+	4.4.3 - Indicar que el tramite esta rechazado
+	4.5 - Al aceptarlo el gato va a pasar a estar como adoptado
+	4.6 - Y al evaluarlo el gato va a pasar a estar como estado a tramite.
+	4.7 - Y al rechazarlo no hace nada
+	
+5) Definir un diseño y pasar los ABM a Boostrap con este diseño.
