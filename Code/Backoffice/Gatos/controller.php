@@ -31,7 +31,7 @@ function procesarRequest() {
         $existeId = array_key_exists('id',$_POST);
         if($existeId == true && $_POST['id'] != null) {
             modificarGato();
-            // vistaListado();
+            vistaListado();
         } else {
             crearGato();
             vistaListado();
@@ -203,8 +203,18 @@ function modificarGato() {
 
 //------------------------------------------------------------------------------------------------------------------------------------
 
-    function eliminarGato() {
-        $id = $_POST['id'];
+function eliminarGato() {
+    $id = $_GET['id'];
 
+    try {
+        iniciarTransaccion();
+
+        ejecutarSql("DELETE FROM vacunasxgatos WHERE IdGato = {$id}");
         ejecutarSql("DELETE FROM Gatos WHERE Id = {$id}");
+
+        commitearTransaccion();
+    } catch (Exception $ex) {
+        rollbackTransaccion();
+        var_dump($ex);
     }
+}

@@ -20,7 +20,7 @@ $listadoGatos = listarGatos();
                 <td><?php echo $gato['Nombre'] ?></td>
                 <td>
                     <input type="button" value="Modificar" onclick="vistaModificar(<?php echo $gato['Id'] ?>);">
-                    <input type="button" value="Eliminar">
+                    <input type="button" value="Eliminar" onclick="vistaEliminar(<?php echo $gato['Id'] ?>);">
                 </td>
             </tr> 
         <?php endwhile; ?>

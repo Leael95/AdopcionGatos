@@ -9,3 +9,7 @@ function vistaListado() {
 function vistaModificar(id) {
     window.location.href = `vistaEditar.php?id=${id}`;
 }
+
+function vistaEliminar(id) {
+    window.location.href = `vistaEliminar.php?id=${id}`;
+}
