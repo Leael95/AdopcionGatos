@@ -87,7 +87,7 @@
                     <td><?php echo $vacuna['Nombre']; ?></td>
                     <td>
                         <input id="fechaVacunas[<?php echo $vacuna['Id']?>]" name="fechaVacunas[<?php echo $vacuna['Id']?>]" type="date" 
-                        value="<?php mostrarFechaSiFueAplicada($vacuna['Id'],$vacunasXGato) ?>">
+                            value="<?php mostrarFechaSiFueAplicada($vacuna['Id'],$vacunasXGato) ?>">
                     </td>
                 </tr>
             <?php endwhile; ?>

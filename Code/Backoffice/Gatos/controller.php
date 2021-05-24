@@ -27,17 +27,15 @@ function procesarRequest() {
         }
     }
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        crearGato();
-        
-        // $existeId = array_key_exists('id',$_POST);
-        // if($existeId == true) {
-        //     modificarGato();
-        //     // vistaListado();
-        // } else {
-        //     crearGato();
-        //     // vistaListado();
-        // }
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {   
+        $existeId = array_key_exists('id',$_POST);
+        if($existeId == true && $_POST['id'] != null) {
+            modificarGato();
+            // vistaListado();
+        } else {
+            crearGato();
+            vistaListado();
+        }
     }
 }
 
@@ -153,11 +151,7 @@ function crearGato() {
         $fechaVacunasGato = $_POST['fechaVacunas'];
         $vacunasGato = $_POST['vacunas'];
 
-        foreach ($vacunasGato as $idVacuna) {
-            $fechaVacuna = $fechaVacunasGato[$idVacuna];
-
-            ejecutarSql("INSERT INTO vacunasxgatos (IdVacuna, IdGato, Fecha) VALUES ({$idVacuna}, {$idGatoCreado}, '{$fechaVacuna}')");
-        }
+        crearVacunasPorGatos($vacunasGato, $fechaVacunasGato, $idGatoCreado);
 
         commitearTransaccion();
     } catch (Exception $e) {
@@ -165,6 +159,17 @@ function crearGato() {
     }
 
 }
+
+//------------------------------------------------------------------------------------------------------------------------------------
+
+function crearVacunasPorGatos($vacunasGato, $fechaVacunas, $idDelGato) {
+    foreach ($vacunasGato as $idVacuna) {
+        $fechaVacuna = $fechaVacunas[$idVacuna];
+
+        ejecutarSql("INSERT INTO vacunasxgatos (IdVacuna, IdGato, Fecha) VALUES ({$idVacuna}, {$idDelGato}, '{$fechaVacuna}')");
+    }
+}
+
 
 //------------------------------------------------------------------------------------------------------------------------------------
 
@@ -178,13 +183,28 @@ function modificarGato() {
     $idEstadoGato = $_POST['idEstadoGato'];
     $pathFotos = $_POST['pathFotos'];
 
-    ejecutarSql("UPDATE Gatos SET Nombre = '{$nombreGato}', Edad = {$edadGato}, Peso = {$pesoGato}, IdRaza = {$idRaza}, IdColor = {$idColor}, IdEstadoGato = {$idEstadoGato}, PathFotos = '{$pathFotos}' WHERE Id = {$id}");
+    // ejecutarSql("UPDATE Gatos SET Nombre = '{$nombreGato}', Edad = {$edadGato}, Peso = {$pesoGato}, IdRaza = {$idRaza}, IdColor = {$idColor}, IdEstadoGato = {$idEstadoGato}, PathFotos = '{$pathFotos}' WHERE Id = {$id}");
+    try {
+        iniciarTransaccion();
+
+            ejecutarSql("UPDATE Gatos SET Nombre = '{$nombreGato}', Edad = {$edadGato}, Peso = {$pesoGato}, IdRaza = {$idRaza}, IdColor = {$idColor}, IdEstadoGato = {$idEstadoGato}, PathFotos = '{$pathFotos}' WHERE Id = {$id}");
+            ejecutarSql("DELETE FROM vacunasxgatos WHERE IdGato={$id}");
+
+            $fechaVacunasGato = $_POST['fechaVacunas'];
+            $vacunasGato = $_POST['vacunas'];
+    
+            crearVacunasPorGatos($vacunasGato, $fechaVacunasGato, $id);
+
+        commitearTransaccion();
+    } catch (Exception $ex) {
+        rollbackTransaccion();
+    }
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------
 
-function eliminarGato() {
-    $id = $_POST['id'];
+    function eliminarGato() {
+        $id = $_POST['id'];
 
-    ejecutarSql("DELETE FROM Gatos WHERE Id = {$id}");
-}
+        ejecutarSql("DELETE FROM Gatos WHERE Id = {$id}");
+    }
