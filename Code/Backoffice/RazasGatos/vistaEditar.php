@@ -17,7 +17,10 @@ procesarRequest();
 <form id="formEditarRazaGato" action="vistaEditar.php" method="post">
     <input type="hidden" value="<?php mostrarId($raza) ?>" name="Id" id="Id">
     <label for="razaGato">Raza Gato</label>
-    <input type="text" id="razaGato" name="razaGato" value="<?php mostrarCampoTexto($raza,'Nombre') ?>" data-parsley-trigger="keyup" required="" data-parsley-maxlength="3" />
+    <input type="text" id="razaGato" name="razaGato" value="<?php mostrarCampoTexto($raza,'Nombre') ?>" 
+      data-parsley-trigger="keyup" 
+      required="" 
+      data-parsley-maxlength="50" />
     <span id="msjErrorrazaGato" class="msjErrorInvisible">Este campo es obligatorio</span>
     </br>
     </br>

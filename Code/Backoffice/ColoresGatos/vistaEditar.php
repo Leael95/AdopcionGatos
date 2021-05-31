@@ -18,7 +18,7 @@ procesarRequest();
     <input id="nombreColor" type="text" name="nombreColor" value="<?php mostrarCampoTexto($color,'Nombre') ?>" 
         data-parsley-trigger="keyup"
         required="" 
-        data-parsley-maxlength="10" />
+        data-parsley-maxlength="50" />
     <span id="msjErrornombreColor" class="msjErrorInvisible">Este campo es obligatorio</span>
     </br>
     </br>

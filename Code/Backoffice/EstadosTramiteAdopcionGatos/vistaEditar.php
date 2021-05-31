@@ -18,7 +18,7 @@ procesarRequest();
     <input type="text" id="estadosTramiteAdopcion" name="estadosTramiteAdopcion" value="<?php mostrarCampoTexto($ETAG, 'Nombre')?>"
         data-parsley-trigger="keyup"
         required=""
-        data-parsley-maxlength="3" />
+        data-parsley-maxlength="50" />
     <span id="msjErrorestadosTramiteAdopcion" class="msjErrorInvisible">Este campo es obligatorio</span>
     </br>
     </br>

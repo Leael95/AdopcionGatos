@@ -18,14 +18,14 @@ procesarRequest();
     <input type="text" id="nombreVacuna" name="nombreVacuna" value="<?php mostrarCampoTexto($vacuna,'Nombre') ?>" 
         data-parsley-trigger="keyup"
         required=""
-        data-parsley-maxlength="20" />
+        data-parsley-maxlength="50" />
     <span id="msjErrornombreVacuna" class="msjErrorInvisible">Este campo es obligatorio</span>
     </br>
     <label for="descripcionVacuna">Descripcion de la vacuna</label>
     <input type="text" id="descripcionVacuna" name="descripcionVacuna" value ="<?php mostrarCampoTexto($vacuna,'Descripcion') ?>"
         data-parsley-trigger="keyup"
         required=""
-        data-parsley-maxlength="20" />
+        data-parsley-maxlength="50" />
     <span id="msjErrordescripcionVacuna" class="msjErrorInvisible">Este campo es obligatorio</span>
     </br>
     </br>

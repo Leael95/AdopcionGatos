@@ -10,6 +10,16 @@
     procesarRequest();
 ?>
 
+<link rel="stylesheet" href="../Assets/Styles/formStyles.css">
+<script src="../Assets/Library/Vendors/jquery-3.6.0.js"></script>
+<script src="../Assets/Library/Vendors/parsley.min.js"></script>
+
+<?php 
+    if($gato != null) {
+        echo mostrarCampoTexto($gato, 'IdEstadoGato');
+    }
+?>
+
 <h1>Vista Editar Gatos</h1>
 
 <form id="formularioGatos" action="vistaEditar.php" method="post">
@@ -17,13 +27,27 @@
     <input id="id" type="hidden" name="id" value=<?php mostrarId($gato); ?>>
 
     <label for="nombreGato">Nombre</label>
-    <input id="nombreGato" name="nombreGato" type="text" value="<?php mostrarCampoTexto($gato, 'Nombre'); ?>"> </br></br>
+    <input id="nombreGato" name="nombreGato" type="text"
+        data-parsey-trigger="keyup"
+        required=""
+        data-parsley-maxlength="50"
+        value="<?php mostrarCampoTexto($gato, 'Nombre'); ?>"
+    > </br></br>
 
     <label for="edadGato">Edad</label>
-    <input id="edadGato" name="edadGato" type="text" value="<?php mostrarCampoTexto($gato, 'Edad'); ?>"></br></br>
+    <input id="edadGato" name="edadGato" type="number"
+        data-parsey-trigger="keyup"  
+        required="" 
+        data-parsley-maxlength="2" 
+        value="<?php mostrarCampoTexto($gato, 'Edad'); ?>"
+    ></br></br>
 
     <label for="pesoGato">Peso</label>
-    <input id="pesoGato" name="pesoGato" type="text" value="<?php mostrarCampoTexto($gato, 'Peso'); ?>"></br></br>
+    <input id="pesoGato" name="pesoGato" type="number" 
+        data-parsey-trigger="keyup"  
+        required="" 
+        data-parsley-maxlength="3" 
+    value="<?php mostrarCampoTexto($gato, 'Peso'); ?>"></br></br>
 
     <label for="idRaza">Raza</label>
     <select id="idRaza" name="idRaza">
@@ -51,8 +75,15 @@
         <?php endwhile; ?>
     </select> </br></br>
 
-    <label for="idEstadoGato">Estado Gato</label>
-    <select id="idEstadoGato" name="idEstadoGato" >
+
+    <label for="pathFotos">Foto</label>
+    <input id="pathFotos" name="pathFotos" type="text" 
+        data-parsey-trigger="keyup"
+        required=""
+        data-parsley-maxlength="50"
+    value="<?php mostrarCampoTexto($gato, 'PathFotos'); ?>"></br>
+
+    <select id="idEstadoGato" name="idEstadoGato" type="hidden" style="visibility: hidden;" >
         <?php while ($estadoGato = mysqli_fetch_assoc($listadoEstados)) : ?>
             <option
                 value="<?php echo $estadoGato['Id'] ?>"
@@ -63,9 +94,6 @@
             </option>
         <?php endwhile; ?>
     </select> </br></br>
-
-    <label for="pathFotos">Foto</label>
-    <input id="pathFotos" name="pathFotos" type="text" value="<?php mostrarCampoTexto($gato, 'PathFotos'); ?>"></br>
 
     <h3>Vacunas</h3>
     <table>
@@ -97,3 +125,7 @@
     <input id="botonEnviar" type="submit" value="Enviar"></br>
     
 </form>
+
+<script>
+    $('#formularioGatos').parsley();
+</script>
