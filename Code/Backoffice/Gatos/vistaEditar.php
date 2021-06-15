@@ -13,12 +13,7 @@
 <link rel="stylesheet" href="../Assets/Styles/formStyles.css">
 <script src="../Assets/Library/Vendors/jquery-3.6.0.js"></script>
 <script src="../Assets/Library/Vendors/parsley.min.js"></script>
-
-<?php 
-    if($gato != null) {
-        echo mostrarCampoTexto($gato, 'IdEstadoGato');
-    }
-?>
+<script src="controller.js"></script>
 
 <h1>Vista Editar Gatos</h1>
 
@@ -81,9 +76,16 @@
         data-parsey-trigger="keyup"
         required=""
         data-parsley-maxlength="50"
-    value="<?php mostrarCampoTexto($gato, 'PathFotos'); ?>"></br>
+    value="<?php mostrarCampoTexto($gato, 'PathFotos'); ?>"></br></br>
 
-    <select id="idEstadoGato" name="idEstadoGato" type="hidden" style="visibility: hidden;" >
+    <select id="idEstadoGato" name="idEstadoGato" disabled 
+        <?php
+            if($gato == null) {
+                $resultado = ejecutarSql("SELECT * FROM estadosgato WHERE Id = 1");
+                echo " style=visibility:hidden;";
+            }
+        ?> 
+    >
         <?php while ($estadoGato = mysqli_fetch_assoc($listadoEstados)) : ?>
             <option
                 value="<?php echo $estadoGato['Id'] ?>"
@@ -108,7 +110,9 @@
             <?php while($vacuna = mysqli_fetch_assoc($listadoVacunas)) : ?>
                 <tr>
                     <td>
-                        <input id="vacunas[<?php echo $vacuna['Id']?>]" name="vacunas[<?php echo $vacuna['Id']?>]" type="checkbox" 
+                        <input id="vacunas[<?php echo $vacuna['Id']?>]" name="vacunas[<?php echo $vacuna['Id']?>]"  
+                            onchange="checkboxChecked(<?php echo $vacuna['Id']?>)"
+                            type="checkbox" 
                             value="<?php echo $vacuna['Id'] ?>" 
                             <?php tildarSiFueAplicada($vacuna['Id'],$vacunasXGato) ?> />
                     </td>

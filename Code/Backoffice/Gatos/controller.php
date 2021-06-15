@@ -146,7 +146,7 @@ function crearGato() {
     try {
         iniciarTransaccion();
 
-        $idGatoCreado = insertAndRetrieveId("INSERT INTO Gatos (Nombre, Edad, Peso, IdRaza, IdColor, IdEstadoGato, PathFotos) VALUES ('{$nombreGato}',{$edadGato},{$pesoGato},{$idRaza},{$idColor},{$idEstadoGato},'{$pathFotos}')");
+        $idGatoCreado = insertAndRetrieveId("INSERT INTO Gatos (Nombre, Edad, Peso, IdRaza, IdColor, IdEstadoGato, PathFotos) VALUES ('{$nombreGato}',{$edadGato},{$pesoGato},{$idRaza},{$idColor},1,'{$pathFotos}')");
 
         $fechaVacunasGato = $_POST['fechaVacunas'];
         $vacunasGato = $_POST['vacunas'];
@@ -187,7 +187,7 @@ function modificarGato() {
     try {
         iniciarTransaccion();
 
-            ejecutarSql("UPDATE Gatos SET Nombre = '{$nombreGato}', Edad = {$edadGato}, Peso = {$pesoGato}, IdRaza = {$idRaza}, IdColor = {$idColor}, IdEstadoGato = {$idEstadoGato}, PathFotos = '{$pathFotos}' WHERE Id = {$id}");
+            ejecutarSql("UPDATE Gatos SET Nombre = '{$nombreGato}', Edad = {$edadGato}, Peso = {$pesoGato}, IdRaza = {$idRaza}, IdColor = {$idColor}, PathFotos = '{$pathFotos}' WHERE Id = {$id}");
             ejecutarSql("DELETE FROM vacunasxgatos WHERE IdGato={$id}");
 
             $fechaVacunasGato = $_POST['fechaVacunas'];
