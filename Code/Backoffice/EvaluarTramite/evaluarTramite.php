@@ -14,7 +14,11 @@ procesarRequest();
 <form action="">
 
     <label for="estadoTramite">Estado de Tramite</label>
-    <input id="estadoTramite" name="estadoTramite" type="text"></br></br>
+    <select id="estadoTramite" name="estadoTramite">
+        <?php while($listarEstadosTramite = mysqli_fetch_assoc($listadoEstadosTramite)) : ?>
+            <option value="<?php echo $listarEstadosTramite["Id"]?>"><?php echo $listarEstadosTramite["Nombre"]?></option>
+        <?php endwhile; ?>
+    </select></br></br>
 
     <label for="nroTramite">Numero de Tramite</label>
     <input id="nroTramite" name="nroTramite" type="number"></br></br>
@@ -25,9 +29,16 @@ procesarRequest();
     <label for="fechaTramiteHasta">Fecha de fin</label>
     <input id="fechaTramiteHasta" name="fechaTramiteHasta" type="date"></br></br>
 
-    <input type="button" value="Buscar">
+    <input type="button" value="Buscar" onclick="filtrar()">
+    <input type="button" value="Mostrar todo" onclick="limpiarTodo()">
 
 </form>
+
+<?php if(mysqli_num_rows($listadoDeTramites) == 0) { ?>
+    <div>
+        <p>No hay resultados wachin</p>    
+    </div>
+<?php } else { ?>
 
 <table>
     <thead>
@@ -50,3 +61,5 @@ procesarRequest();
         <?php endwhile; ?>
     </tbody>
 </table>
+
+<?php } ?>

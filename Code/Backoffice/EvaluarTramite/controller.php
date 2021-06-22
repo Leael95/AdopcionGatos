@@ -5,11 +5,16 @@ $listadoDeTramites = null;
 $detallesTramite = null;
 $listadoEstadosTramite = null;
 
+// -----------------------------------------------------------------------------------------------------------
+
 function procesarRequest() {
     if($_SERVER["REQUEST_METHOD"] = "GET") {
         listarTramites();
+        listarEstadosTramite();
     }
 }
+
+// -----------------------------------------------------------------------------------------------------------
 
 function procesarRequestDetallesTramite() {
     if($_SERVER["REQUEST_METHOD"] = "GET") {
@@ -26,15 +31,35 @@ function procesarRequestDetallesTramite() {
     }
 } 
 
+// -----------------------------------------------------------------------------------------------------------
+
 function listarTramites() {  
+    $estadoTramite = null;
+    $nroTramite = null;
+
+    if(isset($_GET["estadoTramite"])) {
+        $estadoTramite = $_GET["estadoTramite"];
+    }
+
+    if(isset($_GET["nroTramite"])) {
+        $nroTramite = $_GET["nroTramite"];
+    }
+
+    $select = "SELECT tramitesadopcion.Id,tramitesadopcion.NroTramite,tramitesadopcion.NombrePostulante,tramitesadopcion.ApellidoPostulante,tramitesadopcion.IdEstadoTramiteAdopcion,tramitesadopcion.IdGato,tramitesadopcion.FechaEstado,estadostramiteadopcion.Nombre as NombreEstado,gatos.Nombre as NombreGato
+    FROM tramitesadopcion 
+    INNER JOIN estadostramiteadopcion ON tramitesadopcion.IdEstadoTramiteAdopcion = estadostramiteadopcion.Id
+    INNER JOIN gatos ON tramitesadopcion.IdGato = gatos.Id
+    WHERE 
+        tramitesadopcion.NroTramite = IFNULL(".customIfNull($nroTramite).",tramitesadopcion.NroTramite) AND
+        tramitesadopcion.IdEstadoTramiteAdopcion = IFNULL(".customIfNull($estadoTramite).",tramitesadopcion.IdEstadoTramiteAdopcion)
+    ORDER BY tramitesadopcion.Id";
+
     global $listadoDeTramites;
-    $listadoDeTramites = ejecutarSql("SELECT tramitesadopcion.Id,tramitesadopcion.NroTramite,tramitesadopcion.NombrePostulante,tramitesadopcion.ApellidoPostulante,tramitesadopcion.IdEstadoTramiteAdopcion,tramitesadopcion.IdGato,tramitesadopcion.FechaEstado,estadostramiteadopcion.Nombre as NombreEstado,gatos.Nombre as NombreGato
-        FROM tramitesadopcion 
-        INNER JOIN estadostramiteadopcion ON tramitesadopcion.IdEstadoTramiteAdopcion = estadostramiteadopcion.Id
-        INNER JOIN gatos ON tramitesadopcion.IdGato = gatos.Id
-        ORDER BY tramitesadopcion.Id");
+    $listadoDeTramites = ejecutarSql($select);
 
 }
+
+// -----------------------------------------------------------------------------------------------------------
 
 function detallesTramite($id) {
     global $detallesTramite;
@@ -90,3 +115,4 @@ function listarEstadosTramite() {
 
 <!-- SELECT * FROM gatos WHERE Id = IFNULL(13,Id) and IdRaza = IFNULL(2,IdRaza); -->
 <!-- SELECT * FROM tramitesadopcion WHERE date(FechaEstado) between '2021-01-01' and '2021-06-30'; -->
+

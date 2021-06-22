@@ -52,3 +52,11 @@ function rollbackTransaccion() {
     global $conexionActiva;
     mysqli_rollback($conexionActiva);
 }
+
+function customIfNull($valor) {
+    if($valor == null) {
+        return "null";
+    } else {
+        return $valor;
+    }
+}
