@@ -7,27 +7,19 @@ $listadoColores = listar();
 <link rel="stylesheet" href="../Assets/Styles/Vendors/bootstrap.min.css">
 <script src="controller.js"></script>
 
+<body class="p-3 mb-2 bg-dark text-white">
+    <div class="container-fluid d-flex flex-column align-items-center">
+        <h1 class="text-center font-weight-bold">Listado de Colores</h1>
 
-   <div class="container-fluid d-flex flex-column align-items-center">
-    <h1 class="text-center text-uppercase">Vista Listado</h1>
-
-        <br>
-
-        <input class="btn btn-primary" type="button" value="Crear" id="formularioAlta" onclick="mostrarFormularioAlta()">
-
-        <br>
-        <br>
+        <input class="btn btn-primary" type="button" value="Crear" id="formularioAlta" onclick="mostrarFormularioAlta()"></br>
 
         <table>
-        <head>
-            <th class="text-center text-uppercase">Color</th>
+            <th class="text-center text-uppercase p-1">Color</th>
             <th class="text-center text-uppercase">Acciones</th>
-        </head>
-        <body>
         <?php while($colorGato = mysqli_fetch_assoc($listadoColores)) : ?>
             <tr>
                 <td>
-                    <?php echo $colorGato['Nombre'] ?>         
+                    <?php echo $colorGato['Nombre'] ?>       
                 </td>
                 <td>
                     <input class="btn btn-warning" type="button" value="Modificar" onclick="mostrarFormularioModificarColor(<?php echo $colorGato['Id']?>)">
@@ -35,9 +27,7 @@ $listadoColores = listar();
                 </td>
             </tr>
         <?php endwhile; ?>
-        </body>
         </table>
-
-        <input id="botonPrueba" type="button" value="Prueba" onclick="enviarDatosAlServidor()" />
-   </div>
+    </div>
+</body>
 
