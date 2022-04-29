@@ -18,7 +18,7 @@ $listadoColores = listar();
             <th class="text-center text-uppercase">Acciones</th>
         <?php while($colorGato = mysqli_fetch_assoc($listadoColores)) : ?>
             <tr>
-                <td>
+                <td class="text-center">
                     <?php echo $colorGato['Nombre'] ?>       
                 </td>
                 <td>

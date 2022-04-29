@@ -16,7 +16,7 @@ function procesarRequest() {
             global $vacunasXGato;
 
             $idGato = $_GET['id'];
-
+            
             $gato = traerGatoId($idGato);
             $vacunasXGato = traerVacunasXIdGato($idGato);
             var_dump($vacunasXGato);

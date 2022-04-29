@@ -2,6 +2,7 @@
  require "controller.php";
  procesarBaja();
 ?>
+
 <link rel="stylesheet" href="../Assets/Styles/Vendors/bootstrap.min.css">
 <script src="controller.js"></script>
 
